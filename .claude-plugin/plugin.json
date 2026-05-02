@@ -1,0 +1,29 @@
+{
+  "name": "skills",
+  "description": "Engineering and productivity agent skills for real engineers — TDD, debugging, grilling, triage, architecture, and more.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nightshade14"
+  },
+  "homepage": "https://github.com/Nightshade14/skills",
+  "repository": "https://github.com/Nightshade14/skills",
+  "license": "MIT",
+  "skills": [
+    "./skills/engineering/diagnose",
+    "./skills/engineering/grill-with-docs",
+    "./skills/engineering/improve-codebase-architecture",
+    "./skills/engineering/setup-skills",
+    "./skills/engineering/tdd",
+    "./skills/engineering/to-issues",
+    "./skills/engineering/to-prd",
+    "./skills/engineering/triage",
+    "./skills/engineering/zoom-out",
+    "./skills/misc/git-guardrails-claude-code",
+    "./skills/misc/migrate-to-shoehorn",
+    "./skills/misc/scaffold-exercises",
+    "./skills/misc/setup-pre-commit",
+    "./skills/productivity/caveman",
+    "./skills/productivity/grill-me",
+    "./skills/productivity/write-a-skill"
+  ]
+}

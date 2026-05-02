@@ -1,0 +1,14 @@
+{
+  "name": "nightshade14-skills",
+  "owner": {
+    "name": "Nightshade14"
+  },
+  "description": "Engineering and productivity agent skills for real engineers.",
+  "plugins": [
+    {
+      "name": "skills",
+      "source": ".",
+      "description": "Engineering and productivity agent skills for real engineers — TDD, debugging, grilling, triage, architecture, and more."
+    }
+  ]
+}
