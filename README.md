@@ -1,40 +1,35 @@
-# Skills For Real Engineers
+# ai-codegen-skills
 
-Agent skills for everyday real engineering - not vibe coding.
+A curated set of agent skills for real engineering work — not vibe coding.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
-These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
+These skills are designed to be small, easy to adapt, and composable. They work with any model and are grounded in software engineering fundamentals. Hack around with them. Make them your own. Enjoy.
 
-## Quickstart (30-second setup)
+## Install
 
 ### Claude Code Marketplace
 
 Add the marketplace and install the plugin directly from within Claude Code:
 
 ```shell
-/plugin marketplace add Nightshade14/skills
-/plugin install skills@nightshade14-skills
+/plugin marketplace add Nightshade14/ai-codegen-skills
+/plugin install skills@nightshade14-ai-codegen-skills
 ```
 
 Skills are namespaced under the plugin: `/skills:tdd`, `/skills:diagnose`, etc.
 
-### Other agents (npx installer)
+### Local setup
 
-1. Run the skills.sh installer:
+Clone the repo and symlink all skills into `~/.claude/skills/`:
 
 ```bash
-npx skills@latest add Nightshade14/skills
+git clone git@github-personal:Nightshade14/ai-codegen-skills.git
+cd ai-codegen-skills
+./scripts/link-skills.sh
 ```
 
-2. Pick the skills you want, and which coding agents you want to install them on. **Make sure you select `/setup-skills`**.
-
-3. Run `/setup-skills` in your agent. It will:
-   - Ask you which issue tracker you want to use (GitHub, Linear, or local files)
-   - Ask you what labels you apply to ticks when you triage them (`/triage` uses labels)
-   - Ask you where you want to save any docs we create
-
-4. Bam - you're ready to go.
+Then run `/setup-skills` once per repo you want to use the engineering skills in.
 
 ## Why These Skills Exist
 
@@ -46,14 +41,14 @@ These skills exist to fix common failure modes with Claude Code, Codex, and othe
 >
 > David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
 
-**The Problem**. The most common failure mode in software development is misalignment. You think the dev knows what you want. Then you see what they've built - and you realize it didn't understand you at all.
+**The Problem**. The most common failure mode in software development is misalignment. You think the dev knows what you want. Then you see what they've built — and you realize it didn't understand you at all.
 
-This is just the same in the AI age. There is a communication gap between you and the agent. The fix for this is a **grilling session** - getting the agent to ask you detailed questions about what you're building.
+This is just the same in the AI age. There is a communication gap between you and the agent. The fix is a **grilling session** — getting the agent to ask you detailed questions about what you're building.
 
 **The Fix** is to use:
 
-- [`/grill-me`](./skills/productivity/grill-me/SKILL.md) - for non-code uses
-- [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./skills/productivity/grill-me/SKILL.md), but adds more goodies (see below)
+- [`/grill-me`](./skills/productivity/grill-me/SKILL.md) — for non-code uses
+- [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) — same as `/grill-me`, but also sharpens your domain language and updates ADRs
 
 These help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
 
@@ -63,16 +58,12 @@ These help you align with the agent before you get started, and think deeply abo
 >
 > Eric Evans, [Domain-Driven-Design](https://www.amazon.co.uk/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
 
-**The Problem**: At the start of a project, devs and the people they're building the software for (the domain experts) are usually speaking different languages.
+**The Problem**: Agents are usually dropped into a project and asked to figure out the jargon as they go. So they use 20 words where 1 will do.
 
-The same tension exists with agents. Agents are usually dropped into a project and asked to figure out the jargon as they go. So they use 20 words where 1 will do.
-
-**The Fix** for this is a shared language. It's a document that helps agents decode the jargon used in the project.
+**The Fix** is a shared language document (`CONTEXT.md`) that helps agents decode project-specific terminology.
 
 <details>
-<summary>
-Example
-</summary>
+<summary>Example</summary>
 
 Here's an example of what a `CONTEXT.md` entry looks like. Which one is easier to read?
 
@@ -83,9 +74,7 @@ This concision pays off session after session.
 
 </details>
 
-This is built into [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
-
-It's hard to explain how powerful this is. It might be the single coolest technique in this repo. Try it, and see.
+This is built into [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) — a grilling session that builds a shared language with the AI and documents hard-to-explain decisions in ADRs.
 
 > [!TIP]
 > A shared language has many other benefits than reducing verbosity:
@@ -96,21 +85,17 @@ It's hard to explain how powerful this is. It might be the single coolest techni
 
 ### #3: The Code Doesn't Work
 
-> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task that’s too big."
+> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task that's too big."
 >
 > David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
 
-**The Problem**: Let's say that you and the agent are aligned on what to build. What happens when the agent _still_ produces crap?
+**The Problem**: Even when the agent understands what to build, it still produces broken code when it has no feedback on how that code actually runs.
 
-It's time to look at your feedback loops. Without feedback on how the code it produces actually runs, the agent will be flying blind.
+**The Fix**: Tight feedback loops — static types, browser access, and automated tests.
 
-**The Fix**: You need the usual tranche of feedback loops: static types, browser access, and automated tests.
+For automated tests, a red-green-refactor loop is critical. The [`/tdd`](./skills/engineering/tdd/SKILL.md) skill enforces this, giving the agent clear guidance on what makes good and bad tests.
 
-For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
-
-The **[`/tdd`](./skills/engineering/tdd/SKILL.md) skill** slots into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
-
-The **[`/diagnose`](./skills/engineering/diagnose/SKILL.md)** skill wraps best debugging practices into a simple loop.
+For debugging, the [`/diagnose`](./skills/engineering/diagnose/SKILL.md) skill wraps best debugging practices into a disciplined loop.
 
 ### #4: We Built A Ball Of Mud
 
@@ -122,20 +107,17 @@ The **[`/diagnose`](./skills/engineering/diagnose/SKILL.md)** skill wraps best d
 >
 > John Ousterhout, [A Philosophy Of Software Design](https://www.amazon.co.uk/Philosophy-Software-Design-2nd/dp/173210221X)
 
-**The Problem**: Most apps built with agents are complex and hard to change. Because agents can radically speed up coding, they also accelerate software entropy. Codebases get more complex at an unprecedented rate.
+**The Problem**: Agents accelerate software entropy. Codebases get more complex at an unprecedented rate.
 
-**The Fix** for this is a radical new approach to AI-powered development: caring about the design of the code.
-
-This is built in to every layer of these skills:
+**The Fix** is caring about the design of the code:
 
 - [`/to-prd`](./skills/engineering/to-prd/SKILL.md) quizzes you about which modules you're touching before creating a PRD
 - [`/zoom-out`](./skills/engineering/zoom-out/SKILL.md) tells the agent to explain code in the context of the whole system
-
-And crucially, [`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) helps you rescue a codebase that has become a ball of mud. Run it once every few days.
+- [`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) helps rescue a codebase that has become a ball of mud — run it once every few days
 
 ### Summary
 
-Software engineering fundamentals matter more than ever. These skills are a best effort at condensing these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
+Software engineering fundamentals matter more than ever. These skills are a best effort at condensing those fundamentals into repeatable practices. Enjoy.
 
 ## Reference
 
@@ -145,12 +127,12 @@ Skills for daily code work.
 
 - **[diagnose](./skills/engineering/diagnose/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates `CONTEXT.md` and ADRs inline.
-- **[triage](./skills/engineering/triage/SKILL.md)** — Triage issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — Find deepening opportunities in a codebase, informed by the domain language in `CONTEXT.md` and the decisions in `docs/adr/`.
 - **[setup-skills](./skills/engineering/setup-skills/SKILL.md)** — Scaffold the per-repo config (issue tracker, triage label vocabulary, domain doc layout) that the other engineering skills consume. Run once per repo before using `to-issues`, `to-prd`, `triage`, `diagnose`, `tdd`, `improve-codebase-architecture`, or `zoom-out`.
 - **[tdd](./skills/engineering/tdd/SKILL.md)** — Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
 - **[to-issues](./skills/engineering/to-issues/SKILL.md)** — Break any plan, spec, or PRD into independently-grabbable GitHub issues using vertical slices.
 - **[to-prd](./skills/engineering/to-prd/SKILL.md)** — Turn the current conversation context into a PRD and submit it as a GitHub issue. No interview — just synthesizes what you've already discussed.
+- **[triage](./skills/engineering/triage/SKILL.md)** — Triage issues through a state machine of triage roles.
 - **[zoom-out](./skills/engineering/zoom-out/SKILL.md)** — Tell the agent to zoom out and give broader context or a higher-level perspective on an unfamiliar section of code.
 
 ### Productivity
@@ -160,12 +142,3 @@ General workflow tools, not code-specific.
 - **[caveman](./skills/productivity/caveman/SKILL.md)** — Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler while keeping full technical accuracy.
 - **[grill-me](./skills/productivity/grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
 - **[write-a-skill](./skills/productivity/write-a-skill/SKILL.md)** — Create new skills with proper structure, progressive disclosure, and bundled resources.
-
-### Misc
-
-Tools I keep around but rarely use.
-
-- **[git-guardrails-claude-code](./skills/misc/git-guardrails-claude-code/SKILL.md)** — Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, etc.) before they execute.
-- **[migrate-to-shoehorn](./skills/misc/migrate-to-shoehorn/SKILL.md)** — Migrate test files from `as` type assertions to @total-typescript/shoehorn.
-- **[scaffold-exercises](./skills/misc/scaffold-exercises/SKILL.md)** — Create exercise directory structures with sections, problems, solutions, and explainers.
-- **[setup-pre-commit](./skills/misc/setup-pre-commit/SKILL.md)** — Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests.
