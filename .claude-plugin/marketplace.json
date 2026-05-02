@@ -3,10 +3,10 @@
   "owner": {
     "name": "Nightshade14"
   },
-  "description": "Engineering and productivity agent skills for real engineers.",
+  "description": "Concise skills for AI codegen tools",
   "plugins": [
     {
-      "name": "skills",
+      "name": "Nightshade14",
       "source": {
         "source": "github",
         "repo": "Nightshade14/ai-codegen-skills"
