@@ -5,8 +5,8 @@
   "author": {
     "name": "Nightshade14"
   },
-  "homepage": "https://github.com/Nightshade14/skills",
-  "repository": "https://github.com/Nightshade14/skills",
+  "homepage": "https://github.com/Nightshade14/ai-codegen-skills",
+  "repository": "https://github.com/Nightshade14/ai-codegen-skills",
   "license": "MIT",
   "skills": [
     "./skills/engineering/diagnose",
@@ -18,10 +18,6 @@
     "./skills/engineering/to-prd",
     "./skills/engineering/triage",
     "./skills/engineering/zoom-out",
-    "./skills/misc/git-guardrails-claude-code",
-    "./skills/misc/migrate-to-shoehorn",
-    "./skills/misc/scaffold-exercises",
-    "./skills/misc/setup-pre-commit",
     "./skills/productivity/caveman",
     "./skills/productivity/grill-me",
     "./skills/productivity/write-a-skill"
