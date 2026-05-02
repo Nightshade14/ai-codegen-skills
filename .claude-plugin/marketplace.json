@@ -8,7 +8,7 @@
     {
       "name": "skills",
       "source": {
-        "type": "github",
+        "source": "github",
         "repo": "Nightshade14/ai-codegen-skills"
       },
       "description": "Engineering and productivity agent skills for real engineers — TDD, debugging, grilling, triage, architecture, and more."
