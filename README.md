@@ -8,6 +8,18 @@ These skills are designed to be small, easy to adapt, and composable. They work 
 
 ## Install
 
+### Codex
+
+Add the repo marketplace, restart Codex, then install the plugin from the plugin directory:
+
+```shell
+codex plugin marketplace add Nightshade14/ai-codegen-skills --sparse .agents/plugins
+```
+
+After restarting Codex, open the plugin directory, choose `Nightshade14 Repo Plugins`, and install `AI Codegen Skills`.
+
+Codex packaging lives in `.codex-plugin/plugin.json`, and Codex marketplace discovery for this repo lives in `.agents/plugins/marketplace.json`.
+
 ### Claude Code Marketplace
 
 Add the marketplace and install the plugin directly from within Claude Code:
@@ -19,7 +31,9 @@ Add the marketplace and install the plugin directly from within Claude Code:
 
 Skills are namespaced under the plugin: `/skills:tdd`, `/skills:diagnose`, etc.
 
-### Local setup
+Claude packaging remains under `.claude-plugin/`.
+
+### Claude Code Local Setup
 
 Clone the repo and symlink all skills into `~/.claude/skills/`:
 
