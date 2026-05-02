@@ -1,0 +1,36 @@
+{
+  "name": "nightshade14-ai-codegen-skills",
+  "version": "1.0.0",
+  "description": "Engineering and productivity agent skills for real engineers.",
+  "author": {
+    "name": "Nightshade14"
+  },
+  "homepage": "https://github.com/Nightshade14/ai-codegen-skills",
+  "repository": "https://github.com/Nightshade14/ai-codegen-skills",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "claude-code",
+    "skills",
+    "tdd",
+    "debugging",
+    "productivity"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Codegen Skills",
+    "shortDescription": "Reusable engineering skills for Codex and Claude Code",
+    "longDescription": "TDD, debugging, triage, architecture, and productivity skills for coding agents.",
+    "developerName": "Nightshade14",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use tdd to build the next slice of this feature.",
+      "Use diagnose to narrow down this production bug.",
+      "Use grill-with-docs before we change this workflow."
+    ]
+  }
+}
